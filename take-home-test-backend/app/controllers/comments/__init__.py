@@ -1,3 +1,4 @@
+import sys
 from werkzeug.exceptions import NotFound
 from flask import Blueprint, jsonify
 
@@ -20,6 +21,7 @@ def get_comment_by_id(comment_id):
 
 @BLUEPRINT.route('/posts/<post_id>/comments')
 def get_comments_from_post(post_id):
+    print(sys.exc_info())
     return jsonify([
         _comment_to_dict(comment)
         for comment in comments.get_post_comments(post_id)

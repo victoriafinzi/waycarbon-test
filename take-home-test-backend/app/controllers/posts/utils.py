@@ -12,7 +12,7 @@ def _post_to_dict(post: Post, with_content: bool = False) -> Dict[str, Any]:
             "id": post.user.id,
             "name": post.user.username
         },
-        "num_comments": post.num_comments
+        "num_comments": post.num_comments,
     }
 
     if with_content:

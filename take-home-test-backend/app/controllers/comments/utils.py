@@ -2,6 +2,7 @@ from typing import Dict, Any
 from app.repositories.models import Comment
 
 
+
 def _comment_to_dict(comment: Comment) -> Dict[str, Any]:
     """ Represent a Comment as a dictionary """
     return {
