@@ -26,3 +26,11 @@ def get_comment_by_user_id(user_id: int) -> Optional[Comment]:
         .filter_by(user_id=user_id)
         .all()
     )
+
+def get_comment_by_parent_id(parent_comment_id: int) -> Optional[Comment]:
+    """ Return the comments tree from a user by *its* id """
+    return(
+        Comment.query
+        .filter_by(parent_comment_id=parent_comment_id)
+        .all()
+    )

@@ -36,7 +36,6 @@ def get_comments_from_post(post_id):
                 nested_comments_list.append(comment) 
                 list_comments.remove(comment) 
         add_children(nested_comments_list, list_comments) 
-        print(type(jsonify(nested_comments_list)))
         return jsonify(200, nested_comments_list)
     except AttributeError:
         return (404, 'Comment not found')
@@ -51,9 +50,16 @@ def get_coment_tree_by_user_id(user_id):
         Runned out of time to finish it
     """
     comment_by_user = comments.get_comment_by_user_id(user_id)
-    list_comments = [] 
-    nested_comments_list = []
-    for comment in comment_by_user: 
+    comment_by_parent = comments.get_comment_by_parent_id(user_id)
+    list_comments = []
+    list_child_comments = []
+    resp = []
+    for comment in comment_by_user:
         list_comments.append(_comment_to_dict(comment))
-
-    return jsonify(200, list_comments)
+    for comment in comment_by_parent:
+        list_child_comments.append(_comment_to_dict(comment))
+    for comment in list(list_comments): 
+        comment["children"] = []
+        resp.append(comment)
+    add_children(resp, list_child_comments)
+    return jsonify(200,resp)

@@ -12,7 +12,7 @@ from app.repositories import comments
 from app.controllers.comments.utils import _comment_to_dict, add_children
 from app.repositories.models import Post, User, Comment
 from app.tests import TestConfig, create_tables
-from app.controllers.comments import get_comments_from_post, get_comment_by_id
+from app.controllers.comments import get_coment_tree_by_user_id, get_comments_from_post, get_comment_by_id
 
 
 class CommentsControllerTest(unittest.TestCase):
@@ -77,3 +77,11 @@ class CommentsControllerTest(unittest.TestCase):
         comment = _comment_to_dict(comments.get_comment_by_id(1))
         self.assertTrue(comment is not None)
         self.assertIsInstance(comment, dict)
+
+
+    def test_get_coment_tree_by_user_id(self):
+        """ Should return all comments by the id of a post """
+        all_comments = get_coment_tree_by_user_id(1)
+        self.assertIsInstance(all_comments, Flask.response_class)
+        self.assertTrue(all_comments is not None)
+        self.assertEqual(200, all_comments.status_code)

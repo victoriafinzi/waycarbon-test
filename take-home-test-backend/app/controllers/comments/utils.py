@@ -32,4 +32,3 @@ def add_children(nested_list, list_comments):
                 nested_list[i]["children"].append(comment) 
                 list_comments.remove(comment)
                 add_children(nested_list[i]["children"], list_comments) 
-
