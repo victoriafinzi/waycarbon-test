@@ -55,5 +55,15 @@ def get_coment_tree_by_user_id(user_id):
     nested_comments_list = []
     for comment in comment_by_user: 
         list_comments.append(_comment_to_dict(comment))
-
+    # for comment in list(list_comments): 
+    #     if comment["parent"] is None:
+    #         del comment["parent"]
+    #         comment["children"] = [] 
+    #         nested_comments_list.append(comment) 
+    #         list_comments.remove(comment) 
+    # add_children(nested_comments_list, list_comments)   
     return jsonify(200, list_comments)
+
+"""
+Roots Natalie -> parent 
+"""
